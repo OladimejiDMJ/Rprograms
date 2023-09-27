@@ -1,0 +1,19 @@
+count.features.linear <- function(chr, x, y, GFF) {
+GFF <- read.table(GFF, header = TRUE, sep = "\t")
+  # Create a boolean vector to indicate which features overlap with the given coordinates
+  overlap <- 0
+  for (i in 1:nrow(GFF)) {
+    if (chr == GFF[i, 1] && x <= GFF[i, 4] && y >= GFF[i, 5]) {
+      overlap <- overlap + 1
+    }
+  }
+  
+  # Return the number of overlapping features
+  return(overlap)
+}
+
+result <- count.features.linear("chr1", 1000, 2000, "/Users/oladimejisulaiman/Downloads/gencode.v44.primary_assembly.annotation.gff3")
+#print(result)
+# Print the result
+cat("Number of overlapping features:", result, "\n")
+
